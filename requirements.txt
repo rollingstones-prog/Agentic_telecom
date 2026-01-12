@@ -1,20 +1,20 @@
 # Core API framework
-fastapi>=0.115.0
+fastapi
 
 # ASGI server
-uvicorn>=0.30.0
+uvicorn
 
-# Data validation (FastAPI compatible)
-pydantic>=2.9.0
+# Data validation
+pydantic
 
-# Redis client (sync, stable)
-redis>=5.0.0
+# Redis client
+redis
 
-# Optional but recommended (internal FastAPI dependency safety)
-typing-extensions>=4.9.0
+# Utilities
+typing-extensions
+python-dotenv
+prometheus-client
 
 # Agentic Orchestration
-crewai>=0.1.0
-replit>=4.0.0
-python-dotenv>=1.0.0
-prometheus-client>=0.17.0
+crewai
+replit
