@@ -29,6 +29,7 @@ except ImportError:
     class Task: pass
     class Crew: pass
     class Process: pass
+    class ChatAnthropic: pass
 
 try:
     from replit.ai.modelfarm import ChatModel, ChatSession
