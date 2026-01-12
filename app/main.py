@@ -7,17 +7,19 @@ from fastapi import FastAPI, HTTPException
 
 from app.models.schemas import CallEvent, DecisionResponse
 from app.agents.orchestration_agent import OrchestrationAgent
-from prometheus_client import start_http_server
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+from fastapi import Response
 
 app = FastAPI(
     title="Agentic Voice Telecom OS",
     version="0.1.0",
 )
 
-# Start Prometheus metrics server
-start_http_server(8001)
-
 orchestrator = OrchestrationAgent()
+
+@app.get("/metrics")
+def metrics():
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
 
 @app.post("/call/event", response_model=DecisionResponse)
