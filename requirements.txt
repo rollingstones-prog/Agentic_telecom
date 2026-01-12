@@ -18,3 +18,4 @@ prometheus-client
 # Agentic Orchestration
 crewai
 replit
+langchain-anthropic
