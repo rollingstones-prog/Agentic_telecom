@@ -15,6 +15,6 @@ typing-extensions>=4.9.0
 
 # Agentic Orchestration
 crewai>=0.1.0
-replit-ai>=0.1.0
+replit>=4.0.0
 python-dotenv>=1.0.0
 prometheus-client>=0.17.0
