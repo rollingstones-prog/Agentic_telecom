@@ -14,6 +14,9 @@ class RetellCall(BaseModel):
     This model is NEVER used directly by agents.
     """
 
+    # 🔑 CRITICAL IDENTIFIER
+    call_id: Optional[str]
+
     call_status: Optional[str]
     from_number: Optional[str]
     to_number: Optional[str]
@@ -67,7 +70,6 @@ class CallEvent(BaseModel):
         min_length=1,
     )
 
-    # Optional but critical for healing decisions
     error_reason: Optional[str] = Field(
         default=None,
         description="NO_ANSWER | BUSY | SIP_TIMEOUT | AUDIO_LOSS | UNKNOWN",
