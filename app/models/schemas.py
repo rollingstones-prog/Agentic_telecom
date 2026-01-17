@@ -11,41 +11,43 @@ from typing import Optional, Dict, Any, List
 class RetellCall(BaseModel):
     """
     Raw call object received from Retell via Make.com webhook.
-    This model is NEVER used directly by agents.
+    VERY LOOSE schema by design.
+    Retell sends partial data depending on event type.
     """
 
     # 🔑 CRITICAL IDENTIFIER
-    call_id: Optional[str]
+    call_id: Optional[str] = None
 
-    call_status: Optional[str]
-    from_number: Optional[str]
-    to_number: Optional[str]
-    duration_ms: Optional[int]
-    latency: Optional[int]
+    call_status: Optional[str] = None
+    from_number: Optional[str] = None
+    to_number: Optional[str] = None
+    duration_ms: Optional[int] = None
+    latency: Optional[int] = None
 
-    agent_id: Optional[str]
-    agent_name: Optional[str]
-    agent_version: Optional[str]
+    agent_id: Optional[str] = None
+    agent_name: Optional[str] = None
+    agent_version: Optional[str] = None
 
-    call_cost: Optional[float]
+    call_cost: Optional[float] = None
 
-    transcript: Optional[str]
-    transcript_object: Optional[List[Dict[str, Any]]]
+    transcript: Optional[str] = None
+    transcript_object: Optional[List[Dict[str, Any]]] = None
 
-    recording_url: Optional[str]
-    public_log_url: Optional[str]
+    recording_url: Optional[str] = None
+    public_log_url: Optional[str] = None
 
-    disconnect_reason: Optional[str]
+    disconnect_reason: Optional[str] = None
 
 
 class RetellWebhookPayload(BaseModel):
     """
     Full webhook payload received from Make.com (origin: Retell).
+    EXTREMELY LOOSE — never trust external systems.
     """
 
     event: str
-    timestamp: Optional[int]
-    call: RetellCall
+    timestamp: Optional[int] = None
+    call: Optional[RetellCall] = None
 
 
 # ============================================================
