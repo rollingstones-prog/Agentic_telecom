@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import time
 from typing import Dict, Any
 
@@ -41,7 +42,7 @@ def handle_call_event(data: Dict[str, Any]):
     Unified ingress point.
 
     Accepts:
-    - Normalized CallEvent (internal)
+    - Internal normalized CallEvent
     - Retell AI webhook payload via Make.com
     """
 
@@ -49,12 +50,16 @@ def handle_call_event(data: Dict[str, Any]):
         # ----------------------------------------------------
         # CASE 1: Retell / Make webhook payload
         # ----------------------------------------------------
-        if "call" in data and "event" in data:
+        if "event" in data and "call" in data:
             payload = RetellWebhookPayload(**data)
+
+            if payload.call is None or payload.call.call_id is None:
+                raise ValueError("Retell payload missing call_id")
+
             call = payload.call
 
             event = CallEvent(
-                call_id=call.agent_id or call.from_number or "unknown",
+                call_id=call.call_id,
                 event_type=_map_retell_event(payload.event),
                 error_reason=call.disconnect_reason,
                 latency_ms=call.latency,
